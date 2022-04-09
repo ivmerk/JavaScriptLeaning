@@ -57,14 +57,17 @@
 		</form>
 
 		<script>
-			let passwords = document.querySelectorAll(`[type="password"]`);
+			let passwords = document.querySelectorAll('[type="password"]');
 			let checkbox = document.querySelector('#show-passwords');
+
+			//можно сделать чтобы не залетела ошибка if (passwords && checkbox){
 			console.log(passwords);
 			checkbox.addEventListener('click', function (event) {
 			for (let password of passwords){
 				password.type =  (checkbox.checked) ? "text": "password";
 			}
 			});
+			//}
 		</script>
 	</body>
 </html>

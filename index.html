@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 	<head>
 		<meta charset="utf-8">
-		<title>Password Visibility - Multiple Fields</title>
+		<title>Element.getAttribute(), Element.setAttribute(), Element.removeAttribute(), and Element.hasAttribute()</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<style type="text/css">
@@ -11,60 +12,35 @@
 				max-width: 40em;
 				width: 88%;
 			}
-
-			label {
-				display: block;
-				width: 100%;
-			}
-
-			input {
-				margin-bottom: 1em;
-			}
-
-			[type="checkbox"] {
-				margin-bottom: 0;
-				margin-right: 0.25em;
-			}
 		</style>
 	</head>
+
 	<body>
 
-		<h1>Password Visibility - Multiple Fields</h1>
+		<p id="lunch" data-sandwich="tuna" data-chips="Cape Cod" data-drink="soda">Lunch Order</p>
 
-		<p>Enter your current password and new password below.</p>
-
-		<form>
-			<div>
-				<label for="current-password">Current Password</label>
-				<input type="password" name="current-password" id="current-password">
-			</div>
-
-			<div>
-				<label for="new-password">New Password</label>
-				<input type="password" name="new-password" id="new-password">
-			</div>
-
-			<div>
-				<label for="show-passwords">
-					<input type="checkbox" name="show-passwords" id="show-passwords">
-					Show passwords
-				</label>
-			</div>
-
-			<p>
-				<button type="submit">Change Passwords</button>
-			</p>
-		</form>
 
 		<script>
-			let passwords = document.querySelectorAll(`[type="password"]`);
-			let checkbox = document.querySelector('#show-passwords');
-			console.log(passwords);
-			checkbox.addEventListener('click', function (event) {
-			for (let password of passwords){
-				password.type =  (checkbox.checked) ? "text": "password";
+			let elem = document.querySelector('#lunch');
+
+			// Get the value of the [data-sandwich] attribute
+			let sandwich = elem.getAttribute('data-sandwich');
+			console.log(sandwich);
+
+			// Set a value for the [data-sandwich] attribute
+			elem.setAttribute('data-sandwich', 'turkey');
+			sandwich = elem.getAttribute('data-sandwich');	
+			console.log(sandwich);
+			// Remove the [data-chips] attribute
+			elem.removeAttribute('data-chips');
+
+			// Check if an element has the `[data-drink]` attribute
+			if (elem.hasAttribute('data-drink')) {
+				console.log('Add a drink!');
 			}
-			});
+
+			let id = elem.getAttribute('id');
+			console.log(id);
 		</script>
 	</body>
 </html>
