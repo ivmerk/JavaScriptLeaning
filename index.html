@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,26 +22,35 @@
 
 
 		<script>
-			let elem = document.querySelector('#lunch');
-
-			// Get the value of the [data-sandwich] attribute
-			let sandwich = elem.getAttribute('data-sandwich');
-			console.log(sandwich);
-
-			// Set a value for the [data-sandwich] attribute
-			elem.setAttribute('data-sandwich', 'turkey');
-			sandwich = elem.getAttribute('data-sandwich');	
-			console.log(sandwich);
-			// Remove the [data-chips] attribute
-			elem.removeAttribute('data-chips');
-
-			// Check if an element has the `[data-drink]` attribute
-			if (elem.hasAttribute('data-drink')) {
-				console.log('Add a drink!');
+			function topSalary(salaries){
+				let tmp = Object.entries(salaries);
+				let tmpSalary = 0;
+				let result = null;
+				for (let element of tmp){
+					let [ name, salary] = element;
+					if (salary > tmpSalary){
+						tmpSalary = salary;
+						result = name;
+					}
+				}
+				return result;	
+//				let max = 0;
+// 				 let maxName = null;
+//  			for(const [name, salary] of Object.entries(salaries)) {
+//  			  if (max < salary) {
+//  			    max = salary;
+//  		    maxName = name;
+//  		  }
+// 				 }  return maxName;
+//			}
 			}
 
-			let id = elem.getAttribute('id');
-			console.log(id);
+			let salaries = {
+			  "John": 100,
+			  "Pete": 300,
+			  "Mary": 250
+			};
+			alert(topSalary(salaries));
 		</script>
 	</body>
 </html>
