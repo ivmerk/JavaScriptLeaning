@@ -22,35 +22,8 @@
 
 
 		<script>
-			function topSalary(salaries){
-				let tmp = Object.entries(salaries);
-				let tmpSalary = 0;
-				let result = null;
-				for (let element of tmp){
-					let [ name, salary] = element;
-					if (salary > tmpSalary){
-						tmpSalary = salary;
-						result = name;
-					}
-				}
-				return result;	
-//				let max = 0;
-// 				 let maxName = null;
-//  			for(const [name, salary] of Object.entries(salaries)) {
-//  			  if (max < salary) {
-//  			    max = salary;
-//  		    maxName = name;
-//  		  }
-// 				 }  return maxName;
-//			}
-			}
-
-			let salaries = {
-			  "John": 100,
-			  "Pete": 300,
-			  "Mary": 250
-			};
-			alert(topSalary(salaries));
+			let string = 'asdf  asdf   sdf sdf asdf';
+			let array =  string.split(' ');
 		</script>
 	</body>
 </html>
