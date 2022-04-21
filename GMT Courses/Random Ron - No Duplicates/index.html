@@ -38,6 +38,7 @@
 			let quote = document.querySelector('#quote');
 			let btn = document.querySelector('#get-quote');
             let listOfQuot = ['I`ve said too much.'];
+			let string = '';
 			// Get a fresh quote and render it into the DOM
 			function getQuote () {
 				let curQuote = '';
@@ -49,11 +50,15 @@
 					};
 					throw response.status;
 				}).then(function (data) {
-      //              console.log(typeof data[0]);
-    //                console.log(data[0]);
+                  //  console.log(typeof data[0]);
+                   // console.log(data[0]);
+					string = data[0];
+                    console.log(typeof string);
+                    console.log(string);
                     if (listOfQuot.includes(data[0])){
                      //   console.log('повтор');
                         getQuote();
+						return;
                     } else {
                         if (listOfQuot.length >= 50){
                     listOfQuot.shift();
