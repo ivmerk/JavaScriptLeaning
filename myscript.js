@@ -1,10 +1,2 @@
-class User {
-    constructor(name) {
-      this.name = name;
-    }
-    sayHi() {
-      alert(this.name);
-    }
-  }
-  let user = new User("Иван");
-user.sayHi();
+let str = "Привет";  
+alert( [...str] ); // П,р,и,в,е,т
