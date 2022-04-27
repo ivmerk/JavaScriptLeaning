@@ -20,37 +20,21 @@
 		<div id="app"></div>
 
 		<script>
-			async function getJSONfile(url){
-				let response = await fetch(url);
-				if (!response.ok) {
-					throw 'Something went wrong.';
-				}
-				console.log(response);
+			function makeCounter() {
+  let count = 0;
+  return function() {
+    return ++count;
+  };
+}
 
-				let data = await response.json();
+let counter1 = makeCounter();
+let counter2 = makeCounter();
 
-				console.log(data);
+alert( counter1() ); // 0
+alert( counter1() ); // 1
 
-		//		let articles = JSON.parse(data);
-
-				console.log(typeof data);
-				let tmp = data['articles'];
-				let arrOfArticles = [];
-				for (let key in tmp){
-					for (let element in tmp[key]){
-					if (element == "article"){
-						arrOfArticles.push(tmp[key][element]);
-					}}
-				}
-
-				console.log(arrOfArticles);
-				let app = document.querySelector('#app');
-				app.innerHTML = '<ul>' + arrOfArticles.map(function (arrOfArticles) {
-				return '<li>' + arrOfArticles + '</li>';
-			}).join('') + '</ul>';
-			}
-			let url = 'https://vanillajsacademy.com/api/dragons.json';
-			getJSONfile(url);
+alert( counter2() ); // 0 (независимо)
+alert( counter2() ); // 0 (независимо)
 		</script>
 	</body>
 </html>
