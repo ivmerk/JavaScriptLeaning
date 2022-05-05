@@ -2,42 +2,131 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Dragon Trainer Monthly</title>
+		<title>Monsters!</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<style type="text/css">
-			body {
-				margin: 0 auto;
-				max-width: 40em;
-				width: 88%;
+			:root {
+ 			 --font-sans: system-ui, sans-serif;
 			}
+			body {
+				font-family: var(--font-sans);
+				margin: 0 auto;
+				max-width: 40rem;
+				padding: 2vh;
+				width: 90%;
+			}
+
+			.container {
+				text-align: center;
+			}
+
+			h1 { 
+				border-block-end: 2px solid #ccc;
+				font-size: 2rem;
+				letter-spacing: .1rem;
+				margin-block: 0 3rem;
+				padding-block:  0 1rem;
+				text-align: center;
+				text-transform: uppercase;
+			}
+			/**
+			 * A simple grid layout
+			 */
+			.monsters {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+				grid-gap: 1em;
+				text-align: center;
+			}
+			.monster__card {
+				align-items: center;
+				border-radius: .25rem;
+				border: 1px solid #ccc;
+				display: flex;
+				justify-content: center;
+				margin: 0;
+				min-height: 6em;
+				padding: 1em;
+				transition: opacity .2s, transform .2s;
+			}
+			.monster__card:hover {
+				opacity: .5;
+				transform: rotate(180deg);
+			}
+			#btn-shuffle {
+				background-image: linear-gradient(to right, #daa829 0%, #f42b37 20%, #7e0f7e 40%, #1589ca 60%, #34ac52 80%);
+				background-size: 200% auto;
+				border-radius: .5em;
+				border: 0;
+				color: #fff;
+				cursor: pointer;
+				display: block;
+				font-size: 1rem;
+				letter-spacing: .1rem;
+				margin-block: 4em;
+				padding: 1em;
+				text-align: center;
+				text-transform: uppercase;
+				transition: 0.5s;
+				width: 100%;
+			}
+			#btn-shuffle:hover {
+				background-position: right center; 
+				text-decoration: none;
+			}
+			#btn-shuffle[disabled] {
+				pointer-events: none;
+				opacity: .5;
+			}
+			/**
+			 * Make sure images scale
+			 */
+			img {
+				height: auto;
+				max-width: 100%;
+			}
+
+			hr {
+				color: transparent;
+				border-block-start:  2px solid #ccc;
+			}
+
+			footer {
+				font-size: .75rem;
+				margin-block: 4rem;
+				padding-block: 1rem;
+				text-align: center;
+				width: 100%;
+			}
+			a {
+				color: #7e0f7e;
+			}
+
 		</style>
 	</head>
 	<body>
 
-		<h1>Dragon Trainer Monthly</h1>
-
-		<div id="app"></div>
+		
 
 		<script>
-			function makeArmy() {
-			  let shooters = [];
+			function makeCounter() {
 
-			  for (let i = 0; i < 10; i++) {
-			    let shooter = function() { // функция shooter
-			    alert( i ); // должна выводить порядковый номер
-			    };
-			    shooters.push(shooter);
-			  }
-		  
-			  return shooters;
+			function counter() {
+				//counter.set(value) должен устанавливать счётчику значение value
+	//			counter.decrease()должен уменьшать значение счётчика на 1.
+			  return counter.count++;
+			};
+
+			counter.count = 0;
+
+			return counter;
 			}
 
-			let army = makeArmy();
-
-			army[0](); // у 0-го стрелка будет номер 10
-			army[5](); // и у 5-го стрелка тоже будет номер 10
-			// ... у всех стрелков будет номер 10, вместо 0, 1, 2, 3...
+			let counter = makeCounter();
+			alert( counter() ); // 0
+			alert( counter() ); // 1
 		</script>
+
 	</body>
 </html>
