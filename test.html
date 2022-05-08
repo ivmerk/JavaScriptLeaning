@@ -11,14 +11,17 @@
 
 
 		<script>
-			let numbers = [1, 2, 7, 42, 99, 101];
+		 function printNumbers(from, to){
+			 let timerId = setTimeout(function checkNumbers(){
+			if(from < to){
+			console.log(from++);
+			setTimeout(checkNumbers,1000);
+			} 
+			 }, 1000);
 
-			// Create a new array with only numbers greater than 10
-			let biggerThanTen = numbers.filter(function (item) {
-				return item > 10;
-			});
+		};
 
-			console.log(biggerThanTen);
+			printNumbers(1,100);
 		</script>
 	</body>
 </html>

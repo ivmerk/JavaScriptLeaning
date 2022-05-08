@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Monsters! Game</title>
+		<title>Monsters! - Game</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<style type="text/css">
@@ -33,20 +33,32 @@
 				height: auto;
 				max-width: 100%;
 			}
+
+			/**
+			 * Style buttons to not look like buttons
+			 */
+			[data-monster] {
+				background-color: transparent;
+				border: 0;
+			}
 		</style>
 	</head>
 	<body>
 
-		<h1>Monsters! Game</h1>
+		<h1>Monsters! - Game</h1>
 
 		<div id="app"></div>
-
+		<button class="button" onClick="window.location.reload();">Press for new game!</button>
 		<footer>
 			<hr>
 			<p class="text-small text-muted">Icons by <a href="https://thenounproject.com/term/door/311732/">Jamie Dickinson</a>, <a href="https://thenounproject.com/term/monster/184225/">Nicky Knicky</a>, <a href="https://thenounproject.com/term/monster/1510400/">Alvaro Cabrera</a>, <a href="https://thenounproject.com/term/monster/28460/">Eliricon</a>, <a href="https://thenounproject.com/term/monster/82823/">April Yang</a>, <a href="https://thenounproject.com/term/monster/1062009/">tk66</a>, <a href="https://thenounproject.com/term/monster/24990/">Alex WaZa</a>, <a href="https://thenounproject.com/term/monster/37212/">Husein Aziz</a>, <a href="https://thenounproject.com/term/monster/2236082">iconcheese</a>, and <a href="https://thenounproject.com/term/socks/38451/">Yazmin Alanis</a>.</p>
 		</footer>
 
 		<script>
+			//
+			// Variables
+			//
+
 			// The monsters and socks
 			let monsters = [
 				{
@@ -98,13 +110,15 @@
 					alt: 'A pair of athletic socks'
 				}
 			];
-			for (let element of monsters){
-				element.isFocus = false;
-				element.isChecked = false;
-			};
-			
-			// Get the #app element
+
+			let quantityOfClosedMonsters = monsters.length - 1;
+			// Get the elements
 			let app = document.querySelector('#app');
+
+
+			//
+			// Methods
+			//
 
 			/**
 			 * Randomly shuffle an array
@@ -132,42 +146,59 @@
 				return array;
 
 			}
-	
-			
+
+			/**
+			 * Handle click events
+			 * @param  {Event} event The event object
+			 */
+			function clickHandler (event) {
+				// Get the monster
+				let btn = event.target.closest('[data-monster]');
+				if (!btn) return;
+
+				let monster = monsters[btn.getAttribute('data-monster')];
+				if (!monster) return;
+				if(btn.innerHTML.includes('door.svg')) {
+					if(!(--quantityOfClosedMonsters)){
+						alert('You are win! Try one more time. ')
+					}
+				};				
+				// Create the monster image
+				let img = document.createElement('img');
+				img.src = `${monster.name}.svg`;
+				img.alt = monster.alt;
+
+				// Replace the button with the monster
+				btn.replaceWith(img);
+
+				if (monster.name == 'sock'){
+					alert('SOCK!!! You are lose this game. Try one more time.');
+				}
+				//console.log(app.textContent.includes(monsters.map((item => item.alt)) != 'A pair of athletic socks'));
+			}
+
+
+			//
+			// Inits & Event Listeners
+			//
 
 			// Shuffle the monsters array
 			shuffle(monsters);
 
 			// Inject the monsters into the DOM
-			screenOne();	
-			
-
-
-			document.addEventListener('click', function (event) {
-		//	// Check if click happened inside an element with the .dropdown class
-			if (event.target.closest('.grid')) {
-				console.log(`It's dropdown time!`);
-				let element = event.target;
-				console.log(event.target);
-				console.log(element.alt);
-				let monster = monsters.find(item => item.alt == element.alt);
-				monster.isChecked = true;
-				console.log(monster);
-				screenOne();
-			}
-
-			});
-			function screenOne(){
-				app.innerHTML =
-				`<div class="row">
-					${monsters.map(function (monster) {
+			app.innerHTML =
+				`<p>Click a door to reveal a monster. Try not to find the sock.</p>
+				<div class="row">
+					${monsters.map(function (monster, index) {
 						return `
-							<div class="grid">
-								<img border="${monster.isFocus ? 0 : 1}" alt="${monster.alt}" src="${monster.isChecked ? monster.name : "door"}.svg">
+							<div class="grid" aria-live="polite">
+								<button data-monster="${index}"><img alt="Door ${index + 1}" src="door.svg"></button>
 							</div>`;
 					}).join('')}
 				</div>`;
-			};	
+
+			// Listen for click events
+			document.addEventListener('click', clickHandler);
 		</script>
 	</body>
 </html>
