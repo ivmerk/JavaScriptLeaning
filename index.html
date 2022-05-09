@@ -110,22 +110,18 @@
 		
 
 		<script>
-			function makeCounter() {
-
-			function counter() {
-				//counter.set(value) должен устанавливать счётчику значение value
-	//			counter.decrease()должен уменьшать значение счётчика на 1.
-			  return counter.count++;
-			};
-
-			counter.count = 0;
-
-			return counter;
+			function work(a, b) {
+			  alert( a + b ); // произвольная функция или метод
 			}
-
-			let counter = makeCounter();
-			alert( counter() ); // 0
-			alert( counter() ); // 1
+			
+			work = spy(work);
+			
+			work(1, 2); // 3
+			work(4, 5); // 9
+			
+			for (let args of work.calls) {
+			  alert( 'call:' + args.join() ); // "call:1,2", "call:4,5"
+			}
 		</script>
 
 	</body>
